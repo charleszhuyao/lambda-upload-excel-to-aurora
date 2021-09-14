@@ -1,0 +1,38 @@
+<!Doctype html>
+<html>
+    <head>
+        <meta charset="utf-8" />
+        <title>upload file via base64</title>
+		<script src="https://ajax.aspnetcdn.com/ajax/jQuery/jquery-3.2.1.js"></script>
+    </head>
+    <body>
+        <script type="text/javascript">
+        window.onload = function(){
+        // 抓取上传文件，转换代码结果
+        var excel_upload=document.getElementById("excel_upload");
+        var base64_code=document.getElementById("base64_code");
+
+        // 添加功能出发监听事件
+        excel_upload.addEventListener('change',readFile,false);}
+        function readFile(){
+            var file=this.files[0];
+            var reader=new FileReader();
+            reader.readAsDataURL(file);
+            reader.onload=function(){
+                base64_code.innerHTML = this.result;
+
+            }
+        }
+        </script>
+        <input type="file" id="excel_upload" name="filename"/>
+
+        <form id="emp" action="https://5bazyvb453.execute-api.cn-northwest-1.amazonaws.com.cn/v1/predictmovierecommend" method="post" enctype="multipart/form-data">
+
+          <br>User  <input type="text" id="username" name="username"><br><br>
+          <br>Upload <input type="submit" name="uploadBT" value="upload">
+          <br><textarea id="base64_code" name="base64_code" rows="30" cols="360" style="display:none"></textarea>
+        </form>
+
+        <p id="img_area"></p>
+    </body>
+</html>
